@@ -74,7 +74,12 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
-    self.titleLabel.text = self.activity.activityTitle;
+    if ([self.activity.activityTitle isEqualToString:@"INKMailSheet"]) {
+        self.titleLabel.text = @"Mail";
+    }
+    else {
+        self.titleLabel.text = self.activity.activityTitle;
+    }
     [self.titleLabel sizeToFit];
     [self.titleLabel resizeTo:CGSizeMake(self.width, self.titleLabel.height)];
 

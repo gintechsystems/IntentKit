@@ -74,7 +74,12 @@
         [self setNeedsLayout];
     }];
 
-    self.textLabel.text = activity.activityTitle;
+    if ([activity.name isEqualToString:@"INKMailSheet"]) {
+        self.textLabel.text = @"Mail";
+    }
+    else {
+        self.textLabel.text = activity.activityTitle;
+    }
 }
 
 @end
