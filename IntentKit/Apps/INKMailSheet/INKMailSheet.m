@@ -32,20 +32,26 @@ static char AssociatedObjectKey;
     self.controller = [[MFMailComposeViewController alloc] init];
     self.controller.mailComposeDelegate = self;
 
+    [[self.controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
+    self.controller.navigationBar.tintColor = [UIColor whiteColor];
+    
     if (params[@"recipient"]) {
         [self.controller setToRecipients:@[params[@"recipient"]]];
     }
-
+    
     if (params[@"subject"]) {
         [self.controller setSubject:params[@"subject"]];
     }
-
+    
     if (params[@"messageBody"]) {
         BOOL isHtml = params[@"isHtml"] ? [params[@"isHtml"] boolValue] : NO;
         [self.controller setMessageBody:params[@"messageBody"] isHTML:isHtml];
     }
-
-    [presentingViewController presentViewController:self.controller animated:YES completion:nil];
+    
+    [presentingViewController presentViewController:self.controller animated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+        [self.controller setNeedsStatusBarAppearanceUpdate];
+    }];
 
     // The mail controller only holds a weak reference to this object, and it
     // will be released prior to its delegate method to being called.
