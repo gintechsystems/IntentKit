@@ -31,7 +31,8 @@ static char AssociatedObjectKey;
 
     self.controller = [[MFMailComposeViewController alloc] init];
     self.controller.mailComposeDelegate = self;
-
+    self.controller.title = @"New Email";
+    
     [[self.controller navigationBar] setTitleTextAttributes:[NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName]];
     self.controller.navigationBar.tintColor = [UIColor whiteColor];
     
